@@ -1,5 +1,5 @@
 # include "../inc/minish.h"
-
+//hi
 int	minishell(t_stat *stat)
 {
 	char	*input;
