@@ -11,12 +11,13 @@ int	minishell(t_stat *stat)
 	char	*input;
 	t_lst	*parsed;
 
-	//	TODO : 시그널 세팅
+	unset_echoctl();
+	set_signal(SH_SHELL, SH_IGN);
 	while (1)
 	{
 		input = readline("minishell % ");
-		//if (!input)
-			//	TODO : 종료
+		if (input == 0)
+			return ctrl_d();
 		if (*input != '\0')
 		{
 			reset(stat);

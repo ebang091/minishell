@@ -86,9 +86,9 @@ int	main(int argc, char **argv, char **envp)
 	stat.error = init(&stat, envp);
 	if (stat.error != INIT_ERROR)
 	{
-		banner();
+		if (argv)
+			banner();
 		stat.error = minishell(&stat);
-		printf("end\n");
 	}
 	return (0);
 }
