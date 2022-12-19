@@ -22,7 +22,7 @@ void	unset_echoctl(void)
 	struct	termios	term;
 
 	tcgetattr(STDOUT_FILENO, &term);	//	현재 터미널 정보를 term에 저장
-	term.c_cflag &= (~ECHOCTL);			//	터미널의 로컬 플래그를 제어문자 (^C, ^D, ...) 출력 가능하게 변경
+	term.c_lflag &= (~ECHOCTL);			//	터미널의 로컬 플래그를 제어문자 (^C, ^D, ...) 가 안보이게 변경
 	tcsetattr(STDOUT_FILENO, TCSANOW, &term);
 }
 
