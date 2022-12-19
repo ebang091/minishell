@@ -5,20 +5,21 @@ CC		= cc
 LIB		= libft.a
 
 RLDIR	= /opt/homebrew/opt/readline
-#RLDIR	= ~/.brew/opt/readline/			cluster
+#RLDIR	= ~/.brew/opt/readline
 
 RLINC	= $(RLDIR)/include
 
 LIBDIR	= -L $(RLDIR)/lib \
 		  -L libft
-LDLIBS	= -lreadline \
-		  -lft
+LDLIBS	= -l readline \
+		  -l ft
 INCDIR	= -I inc \
 		  -I $(RLINC)
 
 SRCDIR	= srcs
 SRCFILE	= entrypoint.c \
-		  sh.c
+		  sh.c \
+		  signal.c
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)

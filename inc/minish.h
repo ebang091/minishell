@@ -9,4 +9,12 @@
 
 int	minishell(t_stat *stat);
 
+/**
+ * Signal Fuction
+ */
+
+void	unset_echoctl(void);
+int 	ctrl_d(void);
+void	set_signal(int n_int, int n_quit);
+
 #endif	// MINISH_H
