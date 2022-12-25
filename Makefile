@@ -19,7 +19,9 @@ INCDIR	= -I inc \
 SRCDIR	= srcs
 SRCFILE	= entrypoint.c \
 		  sh.c \
-		  signal.c
+		  signal.c \
+		  ft_memory.c \
+		  ft_util.c
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)
