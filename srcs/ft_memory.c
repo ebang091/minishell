@@ -7,14 +7,19 @@
  * @param after size
  * @return new pointer
  */
-void	*ft_realloc(void *ptr, int before, int after)
+void	*ft_realloc(void *ptr, int before, int after, t_bool is_free)
 {
 	void	*ret;
 
 	ret = malloc(after);
 	if (ret)
-		ret = ft_memcpy(ret, ptr, before);
-	free(ptr);
+	{
+		ret = ft_memset(ret, 0, after);
+		if (ptr)
+			ret = ft_memcpy(ret, ptr, before);
+	}
+	if (is_free)
+		free(ptr);
 	return (ret);
 }
 
