@@ -23,7 +23,9 @@ SRCFILE	= entrypoint.c \
 		  ft_memory.c \
 		  ft_util.c \
 		  listing.c \
-		  parsing.c
+		  parsing.c \
+		  quote_handle.c \
+		  exception.c
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)

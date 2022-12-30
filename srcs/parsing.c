@@ -35,8 +35,7 @@ static int	is_special(const char *str, t_elem *elem, t_stat *stat)
 		stat->pipe_num++;
 		elem->type = ET_PIP;
 	}
-	elem->subtype = ret;
-	return (ret);
+	return elem->subtype = ret;	//	갯수
 }
 
 static int	get_elem(const char *str, t_elem *elem, t_stat *stat)
@@ -99,15 +98,16 @@ t_lst	*input_listing(char *input, t_stat *stat)
 	lst = 0;
 	elems = tokenizing(input, &elem_cnt, stat);
 	if (elems == 0
-		/*	TODO LEXER
 		|| parsing_error(elems, stat)
-		|| env_transform(elems, stat)
 		|| quote_pairing(elems)
+		/*	TODO LEXER
+		|| env_transform(elems, stat)
 		*/
 		|| listing(elems, elem_cnt, &lst))
 	{
 		if (stat->error >= 0)
-			perror(strerror(0));
+			perror(strerror(errno));
+			//perror(strerror(errno));
 			//print_parse_err(elems, stat);
 		else
 			stat->error = PARSE_ERROR;
