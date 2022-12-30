@@ -25,8 +25,19 @@ int	minishell(t_stat *stat)
 			parsed = input_listing(input, stat);
 			while (parsed)
 			{
+				printf("argc : %d\n", parsed->argc);
+				printf("fdc : %d\n", parsed->argc);
 				while (*parsed->argv)
 					printf("[%s] ", *parsed->argv++);
+				printf("\n");
+				printf("cmd : [%s]\n", parsed->cmd);
+				if (parsed->fdv)
+				{
+					printf("file : [%s]\n", parsed->fdv->file);
+					printf("type : [%d]\n", parsed->fdv->type);
+					printf("subtype : [%d]\n", parsed->fdv->subtype);
+					printf("\n");
+				}
 				parsed = parsed->next;
 				printf("\n");
 			}
