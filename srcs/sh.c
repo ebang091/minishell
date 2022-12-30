@@ -41,7 +41,6 @@ int	minishell(t_stat *stat)
 				parsed = parsed->next;
 				printf("\n");
 			}
-			//	TODO : 파싱
 
 			//	TODO : 실행 or 에러 처리
 			//	TODO : 파싱 자료구조 release
