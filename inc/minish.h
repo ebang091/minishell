@@ -48,6 +48,12 @@ int		add_node_back(t_lst **head, t_lst *node);
 int		del_node_front(t_lst **head, int is_deep_copied);
 
 /**
+ * Env
+ */
+int		str_to_env(t_elem *elems, t_stat *stat);
+char	*env_setting(char *str, int nquote, t_stat *stat);
+
+/**
  * Exception
  */
 int		parsing_error(t_elem *elems, t_stat *stat);
