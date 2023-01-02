@@ -26,7 +26,8 @@ SRCFILE	= entrypoint.c \
 		  parsing.c \
 		  parsing2.c \
 		  quote_handle.c \
-		  exception.c
+		  exception.c \
+		  env.c
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)
