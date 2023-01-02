@@ -4,6 +4,7 @@
 #include "include.h"
 #include "struct.h"
 #include "define.h"
+#include "../libft/libft.h"
 
 # define SHELL_NAME "minishell"
 
