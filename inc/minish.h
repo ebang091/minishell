@@ -20,6 +20,7 @@ void    do_nothing();
 void	unset_echoctl(void);
 int 	ctrl_d(void);
 void	set_signal(int n_int, int n_quit);
+void    set_struct(struct sigaction *act, void (*f)(int))
 
 
 /**

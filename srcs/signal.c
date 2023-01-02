@@ -37,19 +37,28 @@ int		ctrl_d(void)
 
 void	set_signal(int n_int, int n_quit)
 {
+	struct sigaction * act_ignore;
+	struct sigaction * act_handler;
+	struct sigaction * act_exit;
+
+	
+	set_struct(act_ignore, SIG_IGN);
+	set_struct(act_handler, signal_handler);
+	set_struct(act_exit, signal_handler_exit);
+	//TODO : sigaction에 맞게 함수 변경하기 : 구조체에 함수 넣기.
 
 	if (n_int == SH_IGN)
-		sigaction(SIGINT, do_nothing, NULL);
+		sigaction(SIGINT, act_ignore, NULL);
 	if (n_int == SH_DFL)
-		signal(SIGINT, SIG_DFL);
+		sigaction(SIGINT, act_ignore, NULL);
 	if (n_int == SH_SHELL)
-		sigaction(SIGINT, signal_handler, NULL);
+		sigaction(SIGINT, act_handler, NULL);
 	if (n_int == SH_EXIT)
-		sigaction(SIGINT, signal_handler_exit, NULL);
+		sigaction(SIGINT, act_exit, NULL);
 	if (n_quit == SH_IGN)
-		sigaction(SIGQUIT, do_nothing, NULL);
+		sigaction(SIGQUIT, act_ignore, NULL);
 	if (n_quit == SH_DFL)
-		signal(SIGQUIT, SIG_DFL);
+		sigaction(SIGQUIT, act_ignore, NULL);
 	if (n_quit == SH_SHELL)
-		sigaction(SIGQUIT, signal_handler, NULL);
+		sigaction(SIGQUIT, act_handler, NULL);
 }

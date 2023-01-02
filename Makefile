@@ -36,8 +36,8 @@ SRCFILE	= entrypoint.c \
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)
 
-.c.o	:
-	$(CC) $(CFLAGS) $(INCDIR) -c $< -o $@
+# .c.o	:
+# 	$(CC) $(CFLAGS) $(INCDIR) -c $< -o $@
 
 all		: $(LIB) $(NAME)
 

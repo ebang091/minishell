@@ -1,6 +1,6 @@
 #include "../inc/minish.h"
 
-void do_nothing()
+void set_struct(struct sigaction *act, void (*f)(int))
 {
-    return ;
+    act->__sigaction_u.__sa_handler = f;
 }
