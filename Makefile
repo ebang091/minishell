@@ -26,7 +26,11 @@ SRCFILE	= entrypoint.c \
 		  parsing.c \
 		  quote_handle.c \
 		  exception.c \
-		  env.c
+		  env.c \
+		  redirect.c \
+		  fd_setter.c \
+		  heredoc.c \
+		  execute.c
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)

@@ -53,10 +53,35 @@ int		del_node_front(t_lst **head, int is_deep_copied);
  */
 int		str_to_env(t_elem *elems, t_stat *stat);
 char	*env_setting(char *str, int nquote, t_stat *stat);
+char	*ft_getenv(const char *key, char **env);
 
 /**
  * Exception
  */
 int		parsing_error(t_elem *elems, t_stat *stat);
+
+/**
+ * Heredoc
+ */
+int		heredoc(t_fd *fd, t_stat *stat);
+void	rm_heredoc_tmpfile(t_stat *stat);
+char	*heredoc_input(char *eof, t_stat *stat);
+
+/**
+ * Redirect
+ */
+void	file_redirect_from(int idx, int *bef_fd, t_stat *stat);
+void	pipe_redirect_from(t_lst *node, int *pip_fd);
+void	out_redirect_to(t_lst *node, int *bef_fd, int *aft_fd, t_stat *stat);
+
+int		redirect(t_lst *node, int *bef_fd, t_stat *stat);
+int		redirect_to(t_fd *fd);
+int		redirect_from(t_fd *fd, t_stat *stat);
+
+/**
+ * Exec
+ */
+int		execute_line(t_lst **input, t_stat *stat);
+int		exec_program(t_lst *node, t_stat *stat);
 
 #endif	// MINISH_H

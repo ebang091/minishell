@@ -23,6 +23,7 @@
  */
 # define INIT_ERROR	9999
 # define PARSE_ERROR 8888
+# define EXEC_ERROR 7777
 
 typedef int		t_bool;
 
