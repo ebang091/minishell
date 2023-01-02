@@ -23,6 +23,7 @@ int	minishell(t_stat *stat)
 			reset(stat);
 			add_history(input);
 			parsed = input_listing(input, stat);
+			/*
 			while (parsed)
 			{
 				printf("argc : %d\n", parsed->argc);
@@ -40,8 +41,11 @@ int	minishell(t_stat *stat)
 				}
 				parsed = parsed->next;
 				printf("\n");
-			}
+			}*/
 
+			execute_line(&parsed, stat);
+			while (del_node_front(&parsed, TRUE))
+				;
 			//	TODO : 실행 or 에러 처리
 			//	TODO : 파싱 자료구조 release
 
