@@ -41,6 +41,9 @@ OBJS	= $(SRCS:.c=.o)
 
 all		: $(LIB) $(NAME)
 
+test	: $(OBJS)
+	$(CC) -D TEST $(CFLAGS) $(OBJS) $(LIBDIR) $(LDLIBS) -o $(NAME)
+
 $(NAME)	: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBDIR) $(LDLIBS) -o $(NAME)
 

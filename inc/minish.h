@@ -8,6 +8,9 @@
 
 # define SHELL_NAME "minishell"
 
+# define TEST	//	TODO : 주석 처리하면 출력 사라짐
+# define LEAKS	//	TODO : 주석 처리하면 LEAKS 출력 사라짐
+
 int	minishell(t_stat *stat);
 
 /**

@@ -11,15 +11,19 @@ static char	*find_path(char *cmd, t_stat *stat)
 	if (split_path == 0)
 		return (0);
 	i = 0;
+#ifdef TEST
 	printf("PATH TEST ============\n");
+#endif
 	while (split_path[i])
 	{
 		//path = ft_strtjoin(split_path[i], "/", cmd);	//	TODO : 만들지 말지 고민중
 		path = ft_strjoin(split_path[i], "/");
 		pathapp = ft_strjoin(path, cmd);
-		printf("test : %s\n", pathapp);
 		free(path);
-		if (path == 0)
+#ifdef TEST
+		printf("test : %s\n", pathapp);
+#endif
+		if (pathapp == 0)
 			return (clean_content(split_path, -1));
 		if (open(pathapp, O_EXCL) != -1)
 		{
@@ -59,8 +63,11 @@ int	exec_program(t_lst *node, t_stat *stat)
 			i++;
 		if (i == ft_strlen(node->cmd))
 			node->cmd = find_path(node->cmd, stat);
+#ifdef TEST
 		printf("============ TEST END\n");
 		printf("path : [%s]\n", node->cmd);
+		printf("실행 결과\n");
+#endif
 		execve(node->cmd, node->argv, stat->env);
 		//print_exec_err(i, node->cmd, stat);
 		perror(stat->pgname);
@@ -96,7 +103,7 @@ int	execute_line(t_lst **input, t_stat *stat)
 		rm_heredoc_tmpfile(stat);
 		dup2(stat->inFd, STDIN_FILENO);
 		dup2(stat->outFd, STDOUT_FILENO);
-		del_node_front(input, 2);
+		del_node_front(input, TRUE);
 		pipe_redirect_from(*input, pip_fd);
 	}
 	return (0);
