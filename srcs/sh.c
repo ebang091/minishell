@@ -43,12 +43,10 @@ int	minishell(t_stat *stat)
 				printf("\n");
 			}*/
 
-			execute_line(&parsed, stat);
+			if (TRUE)
+				execute_line(&parsed, stat);
 			while (del_node_front(&parsed, TRUE))
 				;
-			//	TODO : 실행 or 에러 처리
-			//	TODO : 파싱 자료구조 release
-
 			/**
 			 * @brief : 최종 결과 = 실행 결과의 최종 값
 			 * @retval : 이전 결과 값 && 또는 || 현재 결과 값, CMD && CMD 등 여러 명령 처리
@@ -56,6 +54,9 @@ int	minishell(t_stat *stat)
 			stat->last_ret = stat->cmd_ret;
 		}
 		free(input);
+#ifdef LEAKS
+		system("leaks minishell");
+#endif
 	}
 	return (123);
 }
