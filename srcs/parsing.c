@@ -100,9 +100,7 @@ t_lst	*input_listing(char *input, t_stat *stat)
 	if (elems == 0
 		|| parsing_error(elems, stat)
 		|| quote_pairing(elems)
-		/*	TODO LEXER
-		|| env_transform(elems, stat)
-		*/
+		|| str_to_env(elems, stat)
 		|| listing(elems, elem_cnt, &lst))
 	{
 		if (stat->error >= 0)
