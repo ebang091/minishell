@@ -28,24 +28,6 @@ char	*ft_replace(char *str, int idx, int dellen,char *insert)
 }
 
 /**
- * @param str string started with ' or "
- * @return length of 'str' without quote
- */
-int	ft_quotelen(const char *str)
-{
-	int		len;
-
-	if (*str == '\'' || *str == '\"')
-	{
-		len = 1;
-		while (str[len] && *str != str[len])
-			len++;
-		return (len);
-	}
-	return (0);
-}
-
-/**
  * @brief copy arr's elem value
  * @param arr like envp
  * @return new arr

@@ -72,10 +72,6 @@ static int	init(t_stat *stat, char **envp)
 	stat->inFd = dup(STDIN_FILENO);
 	stat->outFd = dup(STDOUT_FILENO);
 	stat->env = deep_copy(envp);
-	//	TODO : ENV PRINT - DEBUG
-	int i = 0;
-	while (stat->env[i])
-		printf("%s\n", stat->env[i++]);
 	if (!(stat->env && stat->inFd != -1 && stat->outFd != -1))
 		return (INIT_ERROR);
 	return (0);

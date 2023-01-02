@@ -26,7 +26,7 @@ struct	s_lst
 	int		argc;
 	char	**argv;
 	int		fdc;
-	t_fd	fdv;
+	t_fd	*fdv;
 	t_lst	*next;
 };
 

@@ -22,6 +22,7 @@
  *	@brief Error Number
  */
 # define INIT_ERROR	9999
+# define PARSE_ERROR 8888
 
 typedef int		t_bool;
 

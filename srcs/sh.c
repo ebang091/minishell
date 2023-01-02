@@ -22,8 +22,26 @@ int	minishell(t_stat *stat)
 		{
 			reset(stat);
 			add_history(input);
+			parsed = input_listing(input, stat);
+			while (parsed)
+			{
+				printf("argc : %d\n", parsed->argc);
+				printf("fdc : %d\n", parsed->argc);
+				while (*parsed->argv)
+					printf("[%s] ", *parsed->argv++);
+				printf("\n");
+				printf("cmd : [%s]\n", parsed->cmd);
+				if (parsed->fdv)
+				{
+					printf("file : [%s]\n", parsed->fdv->file);
+					printf("type : [%d]\n", parsed->fdv->type);
+					printf("subtype : [%d]\n", parsed->fdv->subtype);
+					printf("\n");
+				}
+				parsed = parsed->next;
+				printf("\n");
+			}
 
-			//	TODO : 파싱
 			//	TODO : 실행 or 에러 처리
 			//	TODO : 파싱 자료구조 release
 
@@ -32,8 +50,6 @@ int	minishell(t_stat *stat)
 			 * @retval : 이전 결과 값 && 또는 || 현재 결과 값, CMD && CMD 등 여러 명령 처리
 			 */
 			stat->last_ret = stat->cmd_ret;
-
-			printf("[%s]\n", input);
 		}
 		free(input);
 	}
