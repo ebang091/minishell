@@ -24,6 +24,7 @@ SRCFILE	= entrypoint.c \
 		  ft_util.c \
 		  listing.c \
 		  parsing.c \
+		  parsing2.c \
 		  quote_handle.c \
 		  exception.c
 

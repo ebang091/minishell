@@ -39,17 +39,17 @@ void	set_signal(int n_int, int n_quit)
 {
 
 	if (n_int == SH_IGN)
-		signal(SIGINT, SIG_IGN);
+		sigaction(SIGINT, do_nothing, NULL);
 	if (n_int == SH_DFL)
 		signal(SIGINT, SIG_DFL);
 	if (n_int == SH_SHELL)
-		signal(SIGINT, signal_handler);
+		sigaction(SIGINT, signal_handler, NULL);
 	if (n_int == SH_EXIT)
-		signal(SIGINT, signal_handler_exit);
+		sigaction(SIGINT, signal_handler_exit, NULL);
 	if (n_quit == SH_IGN)
-		signal(SIGQUIT, SIG_IGN);
+		sigaction(SIGQUIT, do_nothing, NULL);
 	if (n_quit == SH_DFL)
 		signal(SIGQUIT, SIG_DFL);
 	if (n_quit == SH_SHELL)
-		signal(SIGQUIT, signal_handler);
+		sigaction(SIGQUIT, signal_handler, NULL);
 }
