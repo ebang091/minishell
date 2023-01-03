@@ -15,10 +15,10 @@ int ft_export(int argc, char **argv, char ***env)
 	{
 		// printf("%s %d\n", argv[1], argc);
 		if (ft_setenv(argv[1] , env))
-			return -1;
-		return 0;
+			return (-1);
+		return (0);
 	}
-	return -1;
+	return (-1);
 }
 
 int ft_unset(int argc, char **argv, char ***env)
@@ -26,8 +26,20 @@ int ft_unset(int argc, char **argv, char ***env)
 	if(argc != 0)
 	{
 		if (ft_rmenv(argv[1], env))
-			return -1;
-		return 0;
+			return (-1);
+		return (0);
 	}
-	return -1;
+	return (-1);
+}
+
+int ft_pwd()
+{
+	char *path;
+
+	path = getcwd(0,0);
+	if(!path)
+		return (-1);
+	printf("%s\n", path);
+	free(path);
+	return (0);
 }
