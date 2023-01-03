@@ -2,21 +2,32 @@
 
 int ft_env(char **env)
 {
-    if(!env)
-        return -1;
-    while(*env)
-        printf("%s\n", *env++);
-    return 0;
+	if(!env)
+		return -1;
+	while(*env)
+		printf("%s\n", *env++);
+	return 0;
 }
 
 int ft_export(int argc, char **argv, char ***env)
 {
-        if(argc != 0)
-        {
-            // printf("%s %d\n", argv[1], argc);
-            if (ft_setenv(argv[1] , env))
-                return -1;
-            return 0;
-        }
-    return -1;
+	if(argc != 0)
+	{
+		// printf("%s %d\n", argv[1], argc);
+		if (ft_setenv(argv[1] , env))
+			return -1;
+		return 0;
+	}
+	return -1;
+}
+
+int ft_unset(int argc, char **argv, char ***env)
+{
+	if(argc != 0)
+	{
+		if (ft_rmenv(argv[1], env))
+			return -1;
+		return 0;
+	}
+	return -1;
 }
