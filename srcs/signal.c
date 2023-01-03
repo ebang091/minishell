@@ -37,19 +37,27 @@ int		ctrl_d(void)
 
 void	set_signal(int n_int, int n_quit)
 {
+	struct sigaction * act_ignore;
+	struct sigaction * act_handler;
+	struct sigaction * act_exit;
+
+	
+	set_struct(act_ignore, SIG_IGN);
+	set_struct(act_handler, signal_handler);
+	set_struct(act_exit, signal_handler_exit);
 
 	if (n_int == SH_IGN)
-		signal(SIGINT, SIG_IGN);
+		sigaction(SIGINT, act_ignore, NULL);
 	if (n_int == SH_DFL)
-		signal(SIGINT, SIG_DFL);
+		sigaction(SIGINT, act_ignore, NULL);
 	if (n_int == SH_SHELL)
-		signal(SIGINT, signal_handler);
+		sigaction(SIGINT, act_handler, NULL);
 	if (n_int == SH_EXIT)
-		signal(SIGINT, signal_handler_exit);
+		sigaction(SIGINT, act_exit, NULL);
 	if (n_quit == SH_IGN)
-		signal(SIGQUIT, SIG_IGN);
+		sigaction(SIGQUIT, act_ignore, NULL);
 	if (n_quit == SH_DFL)
-		signal(SIGQUIT, SIG_DFL);
+		sigaction(SIGQUIT, act_ignore, NULL);
 	if (n_quit == SH_SHELL)
-		signal(SIGQUIT, signal_handler);
+		sigaction(SIGQUIT, act_handler, NULL);
 }
