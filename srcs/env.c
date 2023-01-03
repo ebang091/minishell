@@ -176,7 +176,7 @@ static char	*get_variable(char *key, t_stat *stat)
 		value = ft_getenv(key, stat->env);
 		if (value == 0)
 			value = "";
-		value = ft_strdup(value);
+		//value = ft_strdup(value);
 	}
 	ret = ft_strdup(value);
 	free(value);
