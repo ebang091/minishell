@@ -1,6 +1,6 @@
 NAME	= minishell
-CC		= cc
-#CFLAGS	= -Wall -Wextra -Werror
+CC		= cc -g
+# CFLAGS	= -Wall -Wextra -Werror 
 
 LIB		= libft.a
 
@@ -20,11 +20,13 @@ SRCDIR	= srcs
 SRCFILE	= entrypoint.c \
 		  sh.c \
 		  signal.c \
+		  signal2.c \
+		  builtin.c \
+		  builtin2.c \
 		  ft_memory.c \
 		  ft_util.c \
 		  listing.c \
 		  parsing.c \
-		  parsing2.c \
 		  quote_handle.c \
 		  exception.c \
 		  env.c \
@@ -36,8 +38,8 @@ SRCFILE	= entrypoint.c \
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)
 
-# .c.o	:
-# 	$(CC) $(CFLAGS) $(INCDIR) -c $< -o $@
+.c.o	:
+	$(CC) $(CFLAGS) $(INCDIR) -c $< -o $@
 
 all		: $(LIB) $(NAME)
 

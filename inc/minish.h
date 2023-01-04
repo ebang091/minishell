@@ -8,8 +8,8 @@
 
 # define SHELL_NAME "minishell"
 
-# define TEST	//	TODO : 주석 처리하면 출력 사라짐
-# define LEAKS	//	TODO : 주석 처리하면 LEAKS 출력 사라짐
+// # define TEST	//	TODO : 주석 처리하면 출력 사라짐
+// # define LEAKS	//	TODO : 주석 처리하면 LEAKS 출력 사라짐
 
 int	minishell(t_stat *stat);
 
@@ -20,7 +20,7 @@ void    do_nothing();
 void	unset_echoctl(void);
 int 	ctrl_d(void);
 void	set_signal(int n_int, int n_quit);
-void    set_struct(struct sigaction *act, void (*f)(int))
+void    set_struct(struct sigaction *act, void (*f)(int));
 
 
 /**
@@ -58,7 +58,8 @@ int		del_node_front(t_lst **head, int is_deep_copied);
 int		str_to_env(t_elem *elems, t_stat *stat);
 char	*env_setting(char *str, int nquote, t_stat *stat);
 char	*ft_getenv(const char *key, char **env);
-
+t_bool  ft_setenv(const char *key_value, char ***env);
+t_bool	ft_rmenv(const char *key, char ***env);
 /**
  * Exception
  */
@@ -87,5 +88,15 @@ int		redirect_from(t_fd *fd, t_stat *stat);
  */
 int		execute_line(t_lst **input, t_stat *stat);
 int		exec_program(t_lst *node, t_stat *stat);
+
+/**
+ * builtin
+*/
+
+int     ft_env(char **env);
+int     ft_export(int argc , char **argv, char ***env);
+int		ft_unset(int argc , char **argv, char ***env);
+int 	ft_pwd();
+int		ft_exit(const int argc, char **argv, t_stat *stat);
 
 #endif	// MINISH_H

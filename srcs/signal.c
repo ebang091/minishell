@@ -37,28 +37,28 @@ int		ctrl_d(void)
 
 void	set_signal(int n_int, int n_quit)
 {
-	struct sigaction * act_ignore;
-	struct sigaction * act_handler;
-	struct sigaction * act_exit;
+	struct sigaction act_ignore;
+	struct sigaction act_handler;
+	struct sigaction act_exit;
 
 	
-	set_struct(act_ignore, SIG_IGN);
-	set_struct(act_handler, signal_handler);
-	set_struct(act_exit, signal_handler_exit);
+	set_struct(&act_ignore, SIG_IGN);
+	set_struct(&act_handler, signal_handler);
+	set_struct(&act_exit, signal_handler_exit);
 	//TODO : sigaction에 맞게 함수 변경하기 : 구조체에 함수 넣기.
 
 	if (n_int == SH_IGN)
-		sigaction(SIGINT, act_ignore, NULL);
+		sigaction(SIGINT, &act_ignore, NULL);
 	if (n_int == SH_DFL)
-		sigaction(SIGINT, act_ignore, NULL);
+		sigaction(SIGINT, &act_ignore, NULL);
 	if (n_int == SH_SHELL)
-		sigaction(SIGINT, act_handler, NULL);
+		sigaction(SIGINT, &act_handler, NULL);
 	if (n_int == SH_EXIT)
-		sigaction(SIGINT, act_exit, NULL);
+		sigaction(SIGINT, &act_exit, NULL);
 	if (n_quit == SH_IGN)
-		sigaction(SIGQUIT, act_ignore, NULL);
+		sigaction(SIGQUIT, &act_ignore, NULL);
 	if (n_quit == SH_DFL)
-		sigaction(SIGQUIT, act_ignore, NULL);
+		sigaction(SIGQUIT, &act_ignore, NULL);
 	if (n_quit == SH_SHELL)
-		sigaction(SIGQUIT, act_handler, NULL);
+		sigaction(SIGQUIT, &act_handler, NULL);
 }
