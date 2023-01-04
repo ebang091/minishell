@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/04 23:26:37 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/04 23:27:54 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minish.h"
 
 static int	get_space_idx(const char *str)
@@ -35,7 +47,7 @@ static int	is_special(const char *str, t_elem *elem, t_stat *stat)
 		stat->pipe_num++;
 		elem->type = ET_PIP;
 	}
-	return elem->subtype = ret;	//	갯수
+	return (elem->subtype = ret);
 }
 
 static int	get_elem(const char *str, t_elem *elem, t_stat *stat)
@@ -46,7 +58,7 @@ static int	get_elem(const char *str, t_elem *elem, t_stat *stat)
 	if (len == 0)
 	{
 		while (str[len] && get_space_idx(&str[len]) == 0
-			   && str[len] != '<' && str[len] != '>' && str[len] != '|')
+			&& str[len] != '<' && str[len] != '>' && str[len] != '|')
 		{
 			if (str[len] == '\'' || str[len] == '\"')
 				len += ft_quotelen(&str[len]);
@@ -72,8 +84,8 @@ t_elem	*tokenizing(const char *str, int *cnt, t_stat *stat)
 	while (*str)
 	{
 		ret = (t_elem *)ft_realloc(bef,
-			sizeof(t_elem) * (*cnt + 1), sizeof(t_elem) * (*cnt + 2), FALSE);
-
+				sizeof(t_elem) * (*cnt + 1),
+				sizeof(t_elem) * (*cnt + 2), FALSE);
 		if (ret == 0)
 			return (clean_elem(bef, *cnt));
 		str += get_space_idx(str);
@@ -104,9 +116,7 @@ t_lst	*input_listing(char *input, t_stat *stat)
 		|| listing(elems, elem_cnt, &lst))
 	{
 		if (stat->error >= 0)
-			perror(strerror(errno));
-			//perror(strerror(errno));
-			//print_parse_err(elems, stat);
+			print_parse_err(elems, stat);
 		else
 			stat->error = PARSE_ERROR;
 		clean_elem(elems, elem_cnt);
