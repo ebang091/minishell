@@ -19,8 +19,6 @@ char *find_path(char **argv)
 
 int ft_set_pwd(char ***env)
 {
-	//OLDPWD에 PWD 저장.    <- 오류 가능성: PWD 환경변수 unset 되어있을 때. (나의 오류처리: 오류 출력 - bash 처럼)
-	//PWD에 getcwd 저장. <- 오류 가능성: symbolic path 인 goinfre에. (나의 오류처리: Undefined)
 	char	*path;
 
 	path = ft_getenv("PWD", *env);
@@ -33,7 +31,7 @@ int ft_set_pwd(char ***env)
 	if (!path)
 		return (ft_builtin_error(SHELL_NAME, "cd", "HOME not set"));
 	path = ft_strjoin("PWD=", path);
-	if(ft_setenv(path, *env))
+	if (ft_setenv(path, *env))
 		return (-1);
 	free(path);
 	return (0);
@@ -73,6 +71,7 @@ int	ft_cd(int argc, char **argv, char ***env)
 	}
 	else if (!strcmp(path, "-"))
 	{
+		printf("cd - 입력함\n");
 		if(!cd_go_back(env))
 			return (-1);
 	}
