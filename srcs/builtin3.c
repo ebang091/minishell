@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/04 21:30:25 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/04 21:30:28 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/include.h"
 #include "../inc/minish.h"
 
@@ -30,7 +42,7 @@ int	ft_parsing_error(const char *cmd, const char *msg, const char *tok)
 	ft_putstr_fd(2, tok);
 	ft_putstr_fd(2, "\'");
 	ft_putstr_fd(2, "\n");
-	return (PARS_ERR_RET);
+	return (PARSE_ERROR);
 }
 
 int	ft_builtin_error_tok4(const char *pgname, const char *cmd,

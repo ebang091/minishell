@@ -27,6 +27,7 @@ static int	ft_strcmp_igcase(char *s1, char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
+
 static char	*find_path(char *cmd, t_stat *stat)
 {
 	char	**split_path;
@@ -120,7 +121,11 @@ int	exec_program(t_lst *node, t_stat *stat)
 #endif
 		execve(node->cmd, node->argv, stat->env);
 		//print_exec_err(i, node->cmd, stat);
-		perror(stat->pgname);
+		write(2, "minishell: ", 11);
+		write(2, node->cmd, ft_strlen(node->cmd));
+		write(2, ": ",2);
+		write(2, strerror(errno), ft_strlen(strerror(errno)));
+		write(2, "\n", 2);
 		exit(EXEC_ERROR);
 	}
 	set_signal(SH_IGN, SH_IGN);
