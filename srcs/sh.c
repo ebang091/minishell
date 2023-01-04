@@ -1,5 +1,23 @@
 # include "../inc/minish.h"
 
+static void	print_parse_err(t_elem *elems, t_stat *stat)
+{
+	char	*msg;
+
+	msg = "syntax error near unexpected token";
+	stat->cmd_ret = PARSE_ERROR;
+	if (elems[stat->error].type == ET_PIP)
+		ft_parsing_error(stat->pgname, msg, "|");
+	else if (stat->error == 0)
+		ft_parsing_error(stat->pgname, msg, "newline");
+	else if (elems[stat->error - 1].type == ET_PIP)
+		ft_parsing_error(stat->pgname, msg, "|");
+	else if (elems[stat->error - 1].type == ET_STR)
+		ft_parsing_error(stat->pgname, msg, "newline");
+	else
+		ft_parsing_error(stat->pgname, msg, elems[stat->error].data);
+}
+
 static void reset(t_stat *stat)
 {
 	stat->pipe_num = 0;
