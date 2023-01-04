@@ -1,5 +1,22 @@
 #include "../inc/minish.h"
 
+static int	ft_strcmp_igcase(char *s1, char *s2)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	while (s1 && s2 && s1[i] && s2[i])
+	{
+		c = s1[i];
+		if (s1[i] >= 'A' && s1[i] <= 'Z')
+			c = s1[i] - 'A' + 'a';
+		if (c != s2[i])
+			return (c - s2[i]);
+		i++;
+	}
+	return (s1[i] - s2[i]);
+}
 static char	*find_path(char *cmd, t_stat *stat)
 {
 	char	**split_path;
@@ -37,45 +54,17 @@ static char	*find_path(char *cmd, t_stat *stat)
 	return (cmd);
 }
 
-static int	execute(t_lst *input, t_stat *stat)
-{
-	int	ret;
-
-	//ret = exec_builtin(input, stat);	//	TODO : BUILTIN 만들기
-	ret = -1;
-	if (ret == -1)
-		ret = exec_program(input, stat);
-	return (ret);
-}
-static int	ft_strcmp_igcase(char *s1, char *s2)
-{
-	int		i;
-	char	c;
-
-	i = 0;
-	while (s1 && s2 && s1[i] && s2[i])
-	{
-		c = s1[i];
-		if (s1[i] >= 'A' && s1[i] <= 'Z')
-			c = s1[i] - 'A' + 'a';
-		if (c != s2[i])
-			return (c - s2[i]);
-		i++;
-	}
-	return (s1[i] - s2[i]);
-}
-
 static int	exec_builtin(t_lst *node, t_stat *stat)
 {
-	if (ft_strcmp_igcase(node->cmd, "echo") == 0)
-		return (ft_echo(node->argc, node->argv));
-	else if (ft_strcmp_igcase(node->cmd, "pwd") == 0)
+	// if (ft_strcmp_igcase(node->cmd, "echo") == 0)
+	// 	return (ft_echo(node->argc, node->argv));
+	if (ft_strcmp_igcase(node->cmd, "pwd") == 0)
 		return (ft_pwd());
 	else if (ft_strcmp_igcase(node->cmd, "env") == 0)
 		return (ft_env(stat->env));
-	else if (ft_strcmp_igcase(node->cmd, "cd") == 0)
-		return (stat->pipe_num == 0
-				&& ft_cd(node->argc, node->argv, &stat->env));
+	// else if (ft_strcmp_igcase(node->cmd, "cd") == 0)
+	// 	return (stat->pipe_num == 0
+	// 			&& ft_cd(node->argc, node->argv, &stat->env));
 	else if (ft_strcmp_igcase(node->cmd, "export") == 0)
 		return (stat->pipe_num == 0
 				&& ft_export(node->argc, node->argv, &stat->env));
@@ -86,6 +75,17 @@ static int	exec_builtin(t_lst *node, t_stat *stat)
 		return (stat->pipe_num == 0
 				&& ft_exit(node->argc, node->argv, stat));
 	return (-1);
+}
+
+static int	execute(t_lst *input, t_stat *stat)
+{
+	int	ret;
+
+	ret = exec_builtin(input, stat);	//	TODO : BUILTIN 만들기
+	// ret = -1;
+	if (ret == -1)
+		ret = exec_program(input, stat);
+	return (ret);
 }
 
 int	exec_program(t_lst *node, t_stat *stat)
@@ -101,7 +101,7 @@ int	exec_program(t_lst *node, t_stat *stat)
 		i = 0;
 		while (node->cmd[i] && node->cmd[i] != '/')
 			i++;
-		if (i == ft_strlen(node->cmd))
+		if ((size_t)i == ft_strlen(node->cmd))
 			node->cmd = find_path(node->cmd, stat);
 #ifdef TEST
 		printf("============ TEST END\n");
