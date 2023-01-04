@@ -19,14 +19,14 @@ static void	signal_handler_exit(int signo)
 
 void	unset_echoctl(void)
 {
-	struct	termios	term;
+	struct termios	term;
 
-	tcgetattr(STDOUT_FILENO, &term);	//	현재 터미널 정보를 term에 저장
-	term.c_lflag &= (~ECHOCTL);			//	터미널의 로컬 플래그를 제어문자 (^C, ^D, ...) 가 안보이게 변경
+	tcgetattr (STDOUT_FILENO, &term);
+	term.c_lflag &= (~ECHOCTL);
 	tcsetattr(STDOUT_FILENO, TCSANOW, &term);
 }
 
-int		ctrl_d(void)
+int	ctrl_d(void)
 {
 	printf("\x1b[1A");
 	rl_on_new_line();
@@ -37,16 +37,13 @@ int		ctrl_d(void)
 
 void	set_signal(int n_int, int n_quit)
 {
-	struct sigaction act_ignore;
-	struct sigaction act_handler;
-	struct sigaction act_exit;
+	struct sigaction	act_ignore;
+	struct sigaction	act_handler;
+	struct sigaction	act_exit;
 
-	
 	set_struct(&act_ignore, SIG_IGN);
 	set_struct(&act_handler, signal_handler);
 	set_struct(&act_exit, signal_handler_exit);
-	//TODO : sigaction에 맞게 함수 변경하기 : 구조체에 함수 넣기.
-
 	if (n_int == SH_IGN)
 		sigaction(SIGINT, &act_ignore, NULL);
 	if (n_int == SH_DFL)

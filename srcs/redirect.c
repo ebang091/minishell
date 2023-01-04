@@ -1,10 +1,21 @@
-#include "../inc/minish.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/04 23:28:23 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/04 23:29:14 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../inc/minish.h"
 #ifndef HEREDOC_TMPFILE
 	#define HEREDOC_TMPFILE "_heredoc"
 #endif
 
-int redirect_from(t_fd *fd, t_stat *stat)
+int	redirect_from(t_fd *fd, t_stat *stat)
 {
 	int		fd_in;
 	int		ret;
@@ -25,7 +36,7 @@ int redirect_from(t_fd *fd, t_stat *stat)
 	return (fd_in);
 }
 
-int redirect_to(t_fd *fd)
+int	redirect_to(t_fd *fd)
 {
 	int	fd_out;
 

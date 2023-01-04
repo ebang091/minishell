@@ -1,4 +1,16 @@
-# include "../inc/minish.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sh.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/04 23:29:32 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/04 23:30:06 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/minish.h"
 
 static void	print_parse_err(t_elem *elems, t_stat *stat)
 {
@@ -18,7 +30,7 @@ static void	print_parse_err(t_elem *elems, t_stat *stat)
 		ft_parsing_error(stat->pgname, msg, elems[stat->error].data);
 }
 
-static void reset(t_stat *stat)
+static void	reset(t_stat *stat)
 {
 	stat->pipe_num = 0;
 	stat->error = -1;
@@ -35,7 +47,7 @@ int	minishell(t_stat *stat)
 	{
 		input = readline("minishell % ");
 		if (input == 0)
-			return ctrl_d();
+			return (ctrl_d());
 		if (*input != '\0')
 		{
 			reset(stat);
