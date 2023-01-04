@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 21:30:25 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/04 21:30:28 by ebang            ###   ########.fr       */
+/*   Created: 2023/01/04 22:01:00 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/04 22:01:04 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_builtin_error(const char *cmd, const char *arg, const char *msg)
     return (1);
 }
 
-int	ft_builtin_error4(const char *pgname, const char *cmd, const char *arg, const char *msg)
+int	ft_builtin_error4(char *pgname, char *cmd, char *arg, char *msg)
 {
     write(2, pgname, ft_strlen(pgname));
     write(2, ": ", 2);
@@ -33,30 +33,30 @@ int	ft_builtin_error4(const char *pgname, const char *cmd, const char *arg, cons
 }
 
 
-int	ft_parsing_error(const char *cmd, const char *msg, const char *tok)
+int	ft_parsing_error(char *cmd, char *msg, char *tok)
 {
-	ft_putstr_fd(2, cmd);
-	ft_putstr_fd(2, ": ");
-	ft_putstr_fd(2, msg);
-	ft_putstr_fd(2, " `");
-	ft_putstr_fd(2, tok);
-	ft_putstr_fd(2, "\'");
-	ft_putstr_fd(2, "\n");
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(" `", 2);
+	ft_putstr_fd(tok, 2);
+	ft_putstr_fd("\'", 2);
+	ft_putstr_fd("\n", 2);
 	return (PARSE_ERROR);
 }
 
-int	ft_builtin_error_tok4(const char *pgname, const char *cmd,
-	const char *tok, const char *msg)
+int	ft_builtin_error_tok4(char *pgname,  char *cmd,
+	char *tok, char *msg)
 {
-	ft_putstr_fd(2, pgname);
-	ft_putstr_fd(2, ": ");
-	ft_putstr_fd(2, cmd);
-	ft_putstr_fd(2, ": ");
-	ft_putstr_fd(2, "`");
-	ft_putstr_fd(2, tok);
-	ft_putstr_fd(2, "\'");
-	ft_putstr_fd(2, ": ");
-	ft_putstr_fd(2, msg);
-	ft_putstr_fd(2, "\n");
+	ft_putstr_fd(pgname, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd("`", 2);
+	ft_putstr_fd(tok, 2);
+	ft_putstr_fd("\'", 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 	return (1);
 }
