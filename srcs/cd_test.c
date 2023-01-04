@@ -1,22 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_test.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/04 23:09:02 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/04 23:11:41 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minish.h"
 #include "../inc/include.h"
 
-int		ft_strcmp(char *str1, char *str2)
+int	ft_strcmp(char *str1, char *str2)
 {
 	int	i;
 
 	i = 0;
-	while(str1[i] != '\0' || str2[i] != '\0')
+	while (str1[i] != '\0' || str2[i] != '\0')
 	{
-		if(str1[i] != str2[i])
+		if (str1[i] != str2[i])
 			return (str1[i] - str2[i]);
 			i++;
 	}
 	return (str1[i] - str2[i]);
-
 }
 
-char *find_path(char **argv)
+char	*find_path(char **argv)
 {
 	int	i;
 
@@ -24,15 +35,15 @@ char *find_path(char **argv)
 	while (*argv[++i] != 0)
 	{
 		printf("commands: %s\n", argv[i]);
-		if (argv[i][0] == 'c' && argv[i][1] == 'd')	
-			break;
+		if (argv[i][0] == 'c' && argv[i][1] == 'd')
+			break ;
 	}
 	i++;
 	printf("in find path:  %s\n", argv[i]);
 	return (argv[i]);
 }
 
-int ft_set_pwd(char ***env)
+int	ft_set_pwd(char ***env)
 {
 	char	*path;
 
@@ -52,47 +63,40 @@ int ft_set_pwd(char ***env)
 	return (0);
 }
 
-int cd_go_HOME(char ***env)
+int	cd_go_home(char ***env)
 {
-	//pwd환경변수 불러옴.   <- 오류 가능성: PWD 환경 변수 unset되어있을 때. (나의 오류처리: 오류 출력 - bash 처럼)
-	//그 경로로 chdir함. 
 	char	*path;
 
 	path = ft_getenv("HOME", *env);
 	if (!path)
-		{
-			ft_builtin_error4("minishell", "cd", "", strerror(errno)); // HOME not set으로 출력?
-			return (0);
-		}
-	if (chdir(path) == -1)
 	{
+		ft_builtin_error4 ("minishell", "cd", "", strerror(errno));
 		return (0);
 	}
-	return(1);	
+	if (chdir(path) == -1)
+		return (0);
+	return (1);
 }
 
 int	ft_cd(int argc, char **argv, char ***env)
 {
 	int		ret;
-	char	 *path;
+	char	*path;
 
-	printf("cd command execute!\n\n");
 	path = find_path(argv);
-	printf("parsed path: %s\n", path);
-	if(!ft_strcmp(path, "") || !strcmp(path, "--"))
+	if (!ft_strcmp(path, "") || !strcmp(path, "--"))
 	{
-		if (!cd_go_HOME(env))
+		if (!cd_go_home(env))
 			return (-1);
 	}
 	else if (!strcmp(path, "-"))
 	{
-		printf("cd - 입력함\n");
-		if(!cd_go_back(env))
+		if (!cd_go_back(env))
 			return (-1);
 	}
 	else
 	{
-		if(chdir(path))
+		if (chdir(path))
 			ft_builtin_error("cd", "no such file or directory", path);
 	}
 	ret = ft_set_pwd(env);
