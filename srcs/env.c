@@ -191,7 +191,6 @@ static char	*env_replace(char *str, int *idx, t_stat *stat)
 	char	*ret;
 
 	env[0] = get_env_name(&str[*idx], &env_klen);
-	printf("env[0] = %s\n", env[0]);
 	if (env_klen == 0)
 		return (str);
 	if (env[0] == 0)
