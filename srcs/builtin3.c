@@ -12,8 +12,7 @@ int	ft_builtin_error(const char *cmd, const char *arg, const char *msg)
     return (1);
 }
 
-int	ft_builtin_error4(const char *pgname, const char *cmd,
-                         const char *arg, const char *msg)
+int	ft_builtin_error4(const char *pgname, const char *cmd, const char *arg, const char *msg)
 {
     write(2, pgname, ft_strlen(pgname));
     write(2, ": ", 2);

@@ -62,9 +62,9 @@ static int	exec_builtin(t_lst *node, t_stat *stat)
 		return (ft_pwd());
 	else if (ft_strcmp_igcase(node->cmd, "env") == 0)
 		return (ft_env(stat->env));
-	// else if (ft_strcmp_igcase(node->cmd, "cd") == 0)
-	// 	return (stat->pipe_num == 0
-	// 			&& ft_cd(node->argc, node->argv, &stat->env));
+	else if (ft_strcmp_igcase(node->cmd, "cd") == 0)
+		return (stat->pipe_num == 0
+				&& ft_cd(node->argc, node->argv, &stat->env));
 	else if (ft_strcmp_igcase(node->cmd, "export") == 0)
 		return (stat->pipe_num == 0
 				&& ft_export(node->argc, node->argv, &stat->env));

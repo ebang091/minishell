@@ -4,8 +4,9 @@ CC		= cc -g
 
 LIB		= libft.a
 
-RLDIR	= /opt/homebrew/opt/readline
+#RLDIR	= /opt/homebrew/opt/readline
 #RLDIR	= ~/.brew/opt/readline
+RLDIR	= ~/brew/opt/readline
 
 RLINC	= $(RLDIR)/include
 
@@ -23,6 +24,7 @@ SRCFILE	= entrypoint.c \
 		  signal2.c \
 		  builtin.c \
 		  builtin2.c \
+		  builtin3.c \
 		  ft_memory.c \
 		  ft_util.c \
 		  listing.c \
@@ -33,6 +35,7 @@ SRCFILE	= entrypoint.c \
 		  redirect.c \
 		  fd_setter.c \
 		  heredoc.c \
+		  cd.c \
 		  execute.c
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))

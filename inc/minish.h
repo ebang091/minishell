@@ -98,5 +98,9 @@ int     ft_export(int argc , char **argv, char ***env);
 int		ft_unset(int argc , char **argv, char ***env);
 int 	ft_pwd();
 int		ft_exit(const int argc, char **argv, t_stat *stat);
+int		ft_cd(int argc, char **argv, char ***env);
+
+int		ft_builtin_error(const char *cmd, const char *arg, const char *msg);
+int		ft_builtin_error4(const char *pgname, const char *cmd,const char *arg, const char *msg);
 
 #endif	// MINISH_H
