@@ -20,6 +20,7 @@ INCDIR	= -I inc \
 SRCDIR	= srcs
 SRCFILE	= entrypoint.c \
 		  sh.c \
+		  echo.c \
 		  signal.c \
 		  signal2.c \
 		  builtin.c \

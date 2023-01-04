@@ -99,6 +99,7 @@ int		ft_unset(int argc , char **argv, char ***env);
 int 	ft_pwd();
 int		ft_exit(const int argc, char **argv, t_stat *stat);
 int		ft_cd(int argc, char **argv, char ***env);
+int		cd_go_back(char ***env);
 
 int		ft_builtin_error(const char *cmd, const char *arg, const char *msg);
 
@@ -106,5 +107,5 @@ int		ft_builtin_error(const char *cmd, const char *arg, const char *msg);
 int		ft_builtin_error4(char *pgname, char *cmd, char *arg, char *msg);
 int		ft_parsing_error(char *cmd, char *msg, char *tok);
 
-
+int		ft_strcmp(char *str1, char *str2);
 #endif	// MINISH_H
