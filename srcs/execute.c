@@ -1,4 +1,14 @@
 #include "../inc/minish.h"
+static void	print_exec_err(int i, char *cmd, t_stat *stat)
+{
+	char	*msg;
+
+	if (i == ft_strlen(cmd))
+		msg = "command not found";
+	else
+		msg = strerror(errno);
+	ft_builtin_error(stat->pgname, cmd, msg);
+}
 
 static int	ft_strcmp_igcase(char *s1, char *s2)
 {
