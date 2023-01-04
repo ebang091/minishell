@@ -25,13 +25,13 @@ int ft_set_pwd(char ***env)
 	if (!path)
 		path = "";
 	path = ft_strjoin("OLDPWD=", path);
-	if (ft_setenv(path, *env))
+	if (ft_setenv(path, env))
 		return (-1);
 	path = getcwd(0, 0);
 	if (!path)
 		return (ft_builtin_error(SHELL_NAME, "cd", "HOME not set"));
 	path = ft_strjoin("PWD=", path);
-	if (ft_setenv(path, *env))
+	if (ft_setenv(path, env))
 		return (-1);
 	free(path);
 	return (0);

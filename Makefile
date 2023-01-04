@@ -35,7 +35,8 @@ SRCFILE	= entrypoint.c \
 		  redirect.c \
 		  fd_setter.c \
 		  heredoc.c \
-		  cd.c \
+		  cd_test.c \
+		  cd_test2.c \
 		  execute.c
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
