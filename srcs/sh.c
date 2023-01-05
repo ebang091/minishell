@@ -6,7 +6,7 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:29:32 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/04 23:30:06 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 15:44:43 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,40 +53,13 @@ int	minishell(t_stat *stat)
 			reset(stat);
 			add_history(input);
 			parsed = input_listing(input, stat);
-			/*
-			while (parsed)
-			{
-				printf("argc : %d\n", parsed->argc);
-				printf("fdc : %d\n", parsed->argc);
-				while (*parsed->argv)
-					printf("[%s] ", *parsed->argv++);
-				printf("\n");
-				printf("cmd : [%s]\n", parsed->cmd);
-				if (parsed->fdv)
-				{
-					printf("file : [%s]\n", parsed->fdv->file);
-					printf("type : [%d]\n", parsed->fdv->type);
-					printf("subtype : [%d]\n", parsed->fdv->subtype);
-					printf("\n");
-				}
-				parsed = parsed->next;
-				printf("\n");
-			}*/
-
 			if (TRUE)
 				execute_line(&parsed, stat);
 			while (del_node_front(&parsed, TRUE))
 				;
-			/**
-			 * @brief : 최종 결과 = 실행 결과의 최종 값
-			 * @retval : 이전 결과 값 && 또는 || 현재 결과 값, CMD && CMD 등 여러 명령 처리
-			 */
 			stat->last_ret = stat->cmd_ret;
 		}
 		free(input);
-#ifdef LEAKS
-		system("leaks minishell");
-#endif
 	}
 	return (123);
 }

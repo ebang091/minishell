@@ -1,7 +1,7 @@
 #include "../inc/minish.h"
 
 #ifndef HEREDOC_TMPFILE
-	#define HEREDOC_TMPFILE "_heredoc"
+ #define HEREDOC_TMPFILE "_heredoc"
 #endif
 
 static int	heredoc_eof(char *input, int input_len, char *end, int end_len)
@@ -35,7 +35,7 @@ char	*heredoc_input(char *eof, t_stat *stat)
 	input = 0;
 	len = 1;
 	while (len != 0
-		   && !heredoc_eof(input, total_len, eof, ft_strlen(eof)))
+		&& !heredoc_eof(input, total_len, eof, ft_strlen(eof)))
 	{
 		if (total_len == 0 || (total_len && input[total_len - 1] == '\n'))
 			write(1, "> ", 2);

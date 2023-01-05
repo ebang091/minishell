@@ -60,6 +60,7 @@ char	*env_setting(char *str, int nquote, t_stat *stat);
 char	*ft_getenv(const char *key, char **env);
 t_bool  ft_setenv(const char *key_value, char ***env);
 t_bool	ft_rmenv(const char *key, char ***env);
+t_bool	ft_putenv(const char *key_value, char ***env);
 /**
  * Exception
  */
@@ -93,17 +94,18 @@ int		exec_program(t_lst *node, t_stat *stat);
  * builtin
 */
 
+//env
 int     ft_env(char **env);
 int     ft_export(int argc , char **argv, char ***env);
 int		ft_unset(int argc , char **argv, char ***env);
 int 	ft_pwd();
+//exit
 int		ft_exit(const int argc, char **argv, t_stat *stat);
+//cd
 int		ft_cd(int argc, char **argv, char ***env);
 int		cd_go_back(char ***env);
-
+//error
 int		ft_builtin_error(const char *cmd, const char *arg, const char *msg);
-
-
 int		ft_builtin_error4(char *pgname, char *cmd, char *arg, char *msg);
 int		ft_parsing_error(char *cmd, char *msg, char *tok);
 

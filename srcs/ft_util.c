@@ -9,7 +9,7 @@
  * @param insert string to replace
  * @return new string
  */
-char	*ft_replace(char *str, int idx, int dellen,char *insert)
+char	*ft_replace(char *str, int idx, int dellen, char *insert)
 {
 	int		insert_len;
 	int		str_len;
@@ -17,13 +17,13 @@ char	*ft_replace(char *str, int idx, int dellen,char *insert)
 
 	insert_len = ft_strlen(insert);
 	str_len = ft_strlen(str);
-	ret = (char*)malloc(sizeof(char) * (str_len + insert_len - dellen + 1));
+	ret = (char *)malloc (sizeof (char) * (str_len + insert_len - dellen + 1));
 	if (!ret)
 		return (0);
 	ft_strlcpy(ret, str, idx + 1);
 	ft_strlcpy(&ret[idx], insert, insert_len + 1);
 	ft_strlcpy(&ret[idx + insert_len],
-			   &str[idx + dellen], str_len - idx - dellen + 1);
+		&str[idx + dellen], str_len - idx - dellen + 1);
 	return (ret);
 }
 

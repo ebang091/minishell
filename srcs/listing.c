@@ -14,7 +14,7 @@ static t_lst	*new_node(t_lst *ret, int pipe_idx, t_elem *e)
 		if (e[ret->fdc * 2 + ret->argc].type != ET_STR)
 		{
 			ret->fdv = ft_realloc(ret->fdv, sizeof(t_fd) * (ret->fdc + 1),
-								  sizeof(t_fd) * (ret->fdc + 2), TRUE);
+					sizeof(t_fd) * (ret->fdc + 2), TRUE);
 			if (ret->fdv == 0)
 				return (return_free(ret));
 			free(e[ret->fdc * 2 + ret->argc].data);
@@ -26,7 +26,7 @@ static t_lst	*new_node(t_lst *ret, int pipe_idx, t_elem *e)
 		else
 		{
 			ret->argv = ft_realloc(ret->argv, sizeof(char *) * (ret->argc + 1),
-								   sizeof(char *) * (ret->argc + 2), TRUE);
+					sizeof(char *) * (ret->argc + 2), TRUE);
 			if (ret->argv == 0)
 				return (return_free(ret));
 			ret->argv[ret->argc++] = e[(ret->fdc * 2) + ret->argc].data;
