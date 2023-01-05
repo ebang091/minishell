@@ -6,7 +6,7 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:26:37 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/04 23:27:54 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 19:48:49 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ t_lst	*input_listing(char *input, t_stat *stat)
 	elems = tokenizing(input, &elem_cnt, stat);
 	if (elems == 0
 		|| parsing_error(elems, stat)
-		|| quote_pairing(elems)
 		|| str_to_env(elems, stat)
+		|| quote_pairing(elems)
 		|| listing(elems, elem_cnt, &lst))
 	{
 		if (stat->error >= 0)

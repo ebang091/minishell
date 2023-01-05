@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quote_handle.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 22:37:33 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/05 22:37:34 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minish.h"
 
 static void	cp_without_quote(char *dst, char *src)
@@ -42,18 +54,16 @@ int	quote_pairing(t_elem *elems)
 	return (0);
 }
 
-/**
- * @param str string started with ' or "
- * @return length of 'str' without quote
- */
 int	ft_quotelen(const char *str)
 {
 	int		len;
+	char	quote;
 
-	if (*str == '\'' || *str == '\"')
+	quote = *str;
+	if (quote == '\'' || quote == '\"')
 	{
 		len = 1;
-		while (str[len] && *str != str[len])
+		while (str[len] && quote != str[len])
 			len++;
 		return (len);
 	}

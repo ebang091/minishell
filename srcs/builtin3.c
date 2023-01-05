@@ -6,7 +6,7 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 22:01:00 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/05 16:19:42 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 22:26:36 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,41 @@ int	ft_parsing_error(char *cmd, char *msg, char *tok)
 }
 
 int	ft_builtin_error_tok4(char *pgname, char *cmd,
-	char *tok, char *msg)
+	const char *tok, char *msg)
 {
 	ft_putstr_fd(pgname, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd("`", 2);
-	ft_putstr_fd(tok, 2);
+	ft_putstr_fd((char *)tok, 2);
 	ft_putstr_fd("\'", 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
 	return (1);
+}
+
+int	ft_pwd(char **env)
+{
+	char	*path;
+
+	path = getcwd(0, 0);
+	if (!path)
+	{
+		path = ft_getenv("PWD", env);
+		if (!path)
+			ft_builtin_error(SHELL_NAME, "pwd", strerror(errno));
+		else
+			printf("%s\n", path);
+		return (0);
+	}
+	if (!path)
+	{
+		ft_builtin_error(SHELL_NAME, "pwd", strerror(errno));
+		return (1);
+	}
+	printf("%s\n", path);
+	free(path);
+	return (0);
 }

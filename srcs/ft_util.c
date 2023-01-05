@@ -1,14 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_util.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 20:55:36 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/05 20:55:42 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "../inc/minish.h"
 
-/**
- * @brief str[idx : idx + dellen] => insert
- * @param str source string
- * @param idx start index
- * @param dellen end index
- * @param insert string to replace
- * @return new string
- */
 char	*ft_replace(char *str, int idx, int dellen, char *insert)
 {
 	int		insert_len;

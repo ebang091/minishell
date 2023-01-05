@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 16:37:50 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/05 18:10:43 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minish.h"
 
 int	ft_find_option(char *argv)
@@ -45,7 +57,7 @@ int	ft_echo(int argc, char **argv)
 	while (++i < argc)
 	{
 		if (ft_find_option(argv[i]))
-			print_with_option(start, &flag, argv[1]);
+			print_with_option(start, &flag, argv[i]);
 		else
 		{
 			printf("%s", argv[i]);

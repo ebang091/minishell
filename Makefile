@@ -1,11 +1,9 @@
 NAME	= minishell
 CC		= cc -g
-# CFLAGS	= -Wall -Wextra -Werror 
+CFLAGS	= -Wall -Wextra -Werror 
 
 LIB		= libft.a
 
-#RLDIR	= /opt/homebrew/opt/readline
-#RLDIR	= ~/.brew/opt/readline
 RLDIR	= ~/brew/opt/readline
 
 RLINC	= $(RLDIR)/include
@@ -33,12 +31,16 @@ SRCFILE	= entrypoint.c \
 		  quote_handle.c \
 		  exception.c \
 		  env.c \
+		  env2.c \
+		  env3.c \
 		  redirect.c \
 		  fd_setter.c \
 		  heredoc.c \
 		  cd_test.c \
 		  cd_test2.c \
-		  execute.c
+		  execute.c \
+		  execute2.c
+
 
 SRCS	= $(addprefix $(SRCDIR)/, $(SRCFILE))
 OBJS	= $(SRCS:.c=.o)
@@ -46,12 +48,9 @@ OBJS	= $(SRCS:.c=.o)
 .c.o	:
 	$(CC) $(CFLAGS) $(INCDIR) -c $< -o $@
 
-all		: $(LIB) $(NAME)
+all		: $(NAME) 
 
-test	: $(OBJS)
-	$(CC) -D TEST $(CFLAGS) $(OBJS) $(LIBDIR) $(LDLIBS) -o $(NAME)
-
-$(NAME)	: $(OBJS)
+$(NAME)	: $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBDIR) $(LDLIBS) -o $(NAME)
 
 $(LIB)	:

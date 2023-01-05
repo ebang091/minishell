@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 20:55:27 by ebang             #+#    #+#             */
+/*   Updated: 2023/01/05 22:37:42 by ebang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minish.h"
+
+static void	print_exec_err(int i, char *cmd, t_stat *stat)
+{
+	char	*msg;
+
+	if ((size_t)i == ft_strlen(cmd))
+	{
+		msg = "command not found";
+		stat->error = 127;
+	}
+	else
+		msg = strerror(errno);
+	ft_builtin_error(stat->pgname, cmd, msg);
+}
 
 int	exec_program(t_lst *node, t_stat *stat)
 {
@@ -16,12 +42,8 @@ int	exec_program(t_lst *node, t_stat *stat)
 		if ((size_t)i == ft_strlen(node->cmd))
 			node->cmd = find_path(node->cmd, stat);
 		execve(node->cmd, node->argv, stat->env);
-		write(2, "minishell: ", 11);
-		write(2, node->cmd, ft_strlen(node->cmd));
-		write(2, ": ", 2);
-		write(2, strerror(errno), ft_strlen(strerror(errno)));
-		write(2, "\n", 2);
-		exit(EXEC_ERROR);
+		print_exec_err(i, node->cmd, stat);
+		exit(stat->error);
 	}
 	set_signal(SH_IGN, SH_IGN);
 	wait(&fork_ret);
@@ -44,8 +66,7 @@ int	execute_line(t_lst **input, t_stat *stat)
 		if (fd_err_idx == -2)
 			return (1);
 		if (fd_err_idx != -1)
-			perror("OPEN ERROR");
-			//print_fdopen_err((*input)->fdv[fd_err_idx].file, stat);
+			print_fdopen_err((*input)->fdv[fd_err_idx].file, stat);
 		file_redirect_from(i++, bef_fd, stat);
 		out_redirect_to(*input, bef_fd, pip_fd, stat);
 		if (fd_err_idx == -1 && (*input)->cmd && ft_strlen((*input)->cmd))
@@ -57,4 +78,14 @@ int	execute_line(t_lst **input, t_stat *stat)
 		pipe_redirect_from(*input, pip_fd);
 	}
 	return (0);
+}
+
+int	execute(t_lst *input, t_stat *stat)
+{
+	int	ret;
+
+	ret = exec_builtin(input, stat);
+	if (ret == -1)
+		ret = exec_program(input, stat);
+	return (ret);
 }
