@@ -13,7 +13,6 @@ int		ft_strcmp(char *str1, char *str2)
 			i++;
 	}
 	return (str1[i] - str2[i]);
-
 }
 static int	ft_special_cd(int argc, char **argv, char **env)
 {

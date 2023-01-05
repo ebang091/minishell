@@ -27,4 +27,8 @@
 
 typedef int		t_bool;
 
+#ifndef HEREDOC_TMPFILE
+ #define HEREDOC_TMPFILE "_heredoc"
+#endif
+
 #endif
