@@ -12,6 +12,15 @@
 
 #include "../inc/minish.h"
 
+static void	print_fdopen_err(char *file, t_stat *stat)
+{
+	char	*msg;
+
+	msg = strerror(errno);
+	ft_builtin_error(stat->pgname, file, msg);
+	stat->cmd_ret = EXEC_ERROR;
+}
+
 static void	print_exec_err(int i, char *cmd, t_stat *stat)
 {
 	char	*msg;
