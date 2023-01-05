@@ -6,13 +6,13 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:15:42 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/04 23:19:45 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 19:50:09 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minish.h"
 
-static char	*key_finder(const char *key_value, int idx)
+char	*key_finder(const char *key_value, int idx)
 {
 	char	*ret;
 

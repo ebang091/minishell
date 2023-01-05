@@ -6,13 +6,13 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:29:32 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/05 15:44:43 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 22:36:28 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minish.h"
 
-static void	print_parse_err(t_elem *elems, t_stat *stat)
+void	print_parse_err(t_elem *elems, t_stat *stat)
 {
 	char	*msg;
 
@@ -53,7 +53,7 @@ int	minishell(t_stat *stat)
 			reset(stat);
 			add_history(input);
 			parsed = input_listing(input, stat);
-			if (TRUE)
+			if (parsed)
 				execute_line(&parsed, stat);
 			while (del_node_front(&parsed, TRUE))
 				;

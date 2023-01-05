@@ -6,32 +6,22 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:09:02 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/05 16:13:54 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 22:38:45 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minish.h"
 #include "../inc/include.h"
 
-int	ft_strcmp(char *str1, char *str2)
-{
-	int	i;
-
-	i = 0;
-	while (str1[i] != '\0' || str2[i] != '\0')
-	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-			i++;
-	}
-	return (str1[i] - str2[i]);
-}
-
-char	*find_path(char **argv)
+static char	*cd_find_path(int argc, char **argv)
 {
 	int	i;
 
 	i = -1;
+	if ((argc > 1 && !ft_strcmp(argv[1], "--")))
+		return (argv[2]);
+	if (argc == 1)
+		return (NULL);
 	while (*argv[++i] != 0)
 	{
 		if (argv[i][0] == 'c' && argv[i][1] == 'd')
@@ -41,23 +31,36 @@ char	*find_path(char **argv)
 	return (argv[i]);
 }
 
+int	ft_free(char *str, int flag)
+{
+	free(str);
+	if (flag)
+		return (ft_builtin_error(SHELL_NAME, "cd", "HOME not set"));
+	else
+		return (-1);
+}
+
 int	ft_set_pwd(char ***env)
 {
-	char	*path;
+	char	*path[2];
 
-	path = ft_getenv("PWD", *env);
-	if (!path)
-		path = "";
-	path = ft_strjoin("OLDPWD=", path);
-	if (ft_setenv(path, env))
-		return (-1);
-	path = getcwd(0, 0);
-	if (!path)
-		return (ft_builtin_error(SHELL_NAME, "cd", "HOME not set"));
-	path = ft_strjoin("PWD=", path);
-	if (ft_setenv(path, env))
-		return (-1);
-	free(path);
+	path[0] = ft_getenv("PWD", *env);
+	if (!path[0])
+		path[0] = "";
+	path[1] = ft_strjoin("OLDPWD=", path[0]);
+	if (!path[1])
+		return (1);
+	if (ft_setenv(path[1], env))
+		return (ft_free(path[1], 0));
+	free(path[1]);
+	path[0] = getcwd(0, 0);
+	if (!path[0])
+		return (ft_free(path[0], 1));
+	path[1] = ft_strjoin("PWD=", path[0]);
+	free(path[0]);
+	if (ft_setenv(path[1], env))
+		return (ft_free(path[1], 0));
+	free(path[1]);
 	return (0);
 }
 
@@ -81,8 +84,9 @@ int	ft_cd(int argc, char **argv, char ***env)
 	int		ret;
 	char	*path;
 
-	path = find_path(argv);
-	if (!ft_strcmp(path, "") || !strcmp(path, "--"))
+	ret = 0;
+	path = cd_find_path(argc, argv);
+	if (!path)
 	{
 		if (!cd_go_home(env))
 			return (-1);
@@ -92,10 +96,10 @@ int	ft_cd(int argc, char **argv, char ***env)
 		if (!cd_go_back(env))
 			return (-1);
 	}
-	else
+	else if (chdir(path))
 	{
-		if (chdir(path))
-			ft_builtin_error("cd", "no such file or directory", path);
+		ft_builtin_error4("minishell", "cd", path, "no such file or directory");
+		return (-1);
 	}
 	ret = ft_set_pwd(env);
 	return (ret);
