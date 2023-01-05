@@ -24,11 +24,8 @@
 # define INIT_ERROR	9999
 # define PARSE_ERROR 8888
 # define EXEC_ERROR 7777
+# define HEREDOC_TMPFILE "_heredoc"
 
 typedef int		t_bool;
-
-#ifndef HEREDOC_TMPFILE
- #define HEREDOC_TMPFILE "_heredoc"
-#endif
 
 #endif

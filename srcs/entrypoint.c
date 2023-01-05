@@ -6,7 +6,7 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:49:04 by youngpar          #+#    #+#             */
-/*   Updated: 2023/01/05 15:39:47 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 16:01:59 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ static int	init(t_stat *stat, char **envp)
 {
 	stat->pgname = SHELL_NAME;
 	stat->error = -1;
-	stat->inFd = dup(STDIN_FILENO);
-	stat->outFd = dup(STDOUT_FILENO);
+	stat->in_fd = dup(STDIN_FILENO);
+	stat->out_fd = dup(STDOUT_FILENO);
 	stat->env = deep_copy(envp);
-	if (!(stat->env && stat->inFd != -1 && stat->outFd != -1))
+	if (!(stat->env && stat->in_fd != -1 && stat->out_fd != -1))
 		return (INIT_ERROR);
 	return (0);
 }

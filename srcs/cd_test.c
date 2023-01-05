@@ -6,7 +6,7 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:09:02 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/04 23:11:41 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 16:13:54 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ char	*find_path(char **argv)
 	i = -1;
 	while (*argv[++i] != 0)
 	{
-		printf("commands: %s\n", argv[i]);
 		if (argv[i][0] == 'c' && argv[i][1] == 'd')
 			break ;
 	}
 	i++;
-	printf("in find path:  %s\n", argv[i]);
 	return (argv[i]);
 }
 

@@ -1,10 +1,10 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct	s_elem	t_elem;
-typedef struct	s_fd	t_fd;
-typedef struct	s_lst	t_lst;
-typedef struct	s_stat	t_stat;
+typedef struct s_elem	t_elem;
+typedef struct s_fd		t_fd;
+typedef struct s_lst	t_lst;
+typedef struct s_stat	t_stat;
 
 struct	s_elem
 {
@@ -33,8 +33,8 @@ struct	s_lst
 struct	s_stat
 {
 	char	*pgname;
-	int		inFd;
-	int		outFd;
+	int		in_fd;
+	int		out_fd;
 	int		exist_tmp;
 	int		cmd_ret;
 	int		last_ret;
