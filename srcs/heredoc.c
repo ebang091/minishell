@@ -1,9 +1,5 @@
 #include "../inc/minish.h"
 
-#ifndef HEREDOC_TMPFILE
- #define HEREDOC_TMPFILE "_heredoc"
-#endif
-
 static int	heredoc_eof(char *input, int input_len, char *end, int end_len)
 {
 	int	i;
@@ -42,7 +38,7 @@ char	*heredoc_input(char *eof, t_stat *stat)
 		input = ft_realloc(input, total_len, total_len + HEREDOC_RDBYTE + 1, 1);
 		if (input == 0)
 			return (0);
-		len = read(stat->outFd, &input[total_len], HEREDOC_RDBYTE);
+		len = read(stat->out_fd, &input[total_len], HEREDOC_RDBYTE);
 		total_len += len;
 	}
 	return (input);

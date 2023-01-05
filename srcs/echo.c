@@ -1,48 +1,51 @@
 #include "../inc/minish.h"
 
-//@brief  stdout 으로 지정된 fd로 command 인자를 출력
-//TODO : @성공 시, 실패시 반환 값
-//궁금한 점: pipe, redirection 의 경우, stdout을 미리 변경한 후에 실행하면 되나?
-
-
-int ft_find_option(char *argv)
+int	ft_find_option(char *argv)
 {
 	int	i;
-	int cnt;
+	int	cnt;
 
 	i = 1;
 	cnt = 0;
-	if(argv[0] != '-')
+	if (argv[0] != '-')
 		return (0);
 	while (argv[i] && argv[i] == 'n')
 	{
 			cnt++;
 			i++;
 	}
-	if(argv[i])
-		return 0;
+	if (argv[i])
+		return (0);
 	return (cnt);
 }
 
-int ft_echo(int argc, char **argv)
+void	ft_print_newline(int flag)
+{
+	if (!flag)
+		printf("\n");
+}
+
+void	print_with_option(int start, int *flag, char *argv)
+{
+	if (start)
+		*flag = 1;
+	else
+		printf("%s", argv);
+}
+
+int	ft_echo(int argc, char **argv)
 {
 	int	i;
 	int	flag;
-	int start;
+	int	start;
 
-	i = 1;
+	i = 0;
 	flag = 0;
 	start = 1;
-	while(i < argc)
+	while (++i < argc)
 	{
-		if(ft_find_option(argv[i]))
-		{
-			if(start)
-				flag = 1;					
-			else{
-				printf("%s", argv[i]);
-			}
-		}
+		if (ft_find_option(argv[i]))
+			print_with_option(start, &flag, argv[1]);
 		else
 		{
 			printf("%s", argv[i]);
@@ -50,9 +53,7 @@ int ft_echo(int argc, char **argv)
 				printf(" ");
 			start = 0;
 		}
-		i++;
 	}
-	if(!flag)
-		printf("\n");
+	ft_print_newline(flag);
 	return (0);
 }

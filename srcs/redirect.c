@@ -6,14 +6,11 @@
 /*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:28:23 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/04 23:29:14 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/05 15:52:51 by ebang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minish.h"
-#ifndef HEREDOC_TMPFILE
-	#define HEREDOC_TMPFILE "_heredoc"
-#endif
 
 int	redirect_from(t_fd *fd, t_stat *stat)
 {
