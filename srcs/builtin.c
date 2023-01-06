@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebang <ebang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eunjungbang <eunjungbang@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:37:35 by ebang             #+#    #+#             */
-/*   Updated: 2023/01/05 22:39:24 by ebang            ###   ########.fr       */
+/*   Updated: 2023/01/06 22:28:56 by eunjungbang      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ int	ft_export(int argc, char **argv, char ***env)
 
 int	ft_unset(int argc, char **argv, char ***env)
 {
-	if (argc != 0)
+	if(argc == 1)
+		return (0);
+	if (argc > 1)
 	{
 		if (ft_rmenv(argv[1], env))
 			return (-1);
